@@ -33,7 +33,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#containerNavbarCenter" aria-controls="containerNavbarCenter" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-            
+
             <div class="collapse navbar-collapse justify-content-md-center" id="containerNavbarCenter"><form method="post">
               <ul class="navbar-nav">
                 <li class="nav-item active">
@@ -55,7 +55,7 @@
                 </li>
               </ul>
             </form></div>
-            
+
           </nav>
 
           <div class="jumbotron text">
@@ -77,7 +77,7 @@
                 $contents = htmlspecialchars($contents);
                 $contents = nl2br($contents);
                 $contents = trim(preg_replace('/\s+/', ' ', $contents)); // remove any "newlines" i.e. remove \n
-                
+
 
                 ?>
 
@@ -85,7 +85,7 @@
                 <div style="text-align: left; margin: 10 5 5 10; font-size: 20px;" class="text">
                     <span  onClick="this.contentEditable='true';"  id="thenote" name="thenote" class="text" style="display: inline-block; vertical-align: middle; line-height: normal;"><?php echo $contents; ?></span>
                 </div>
-                
+
                 <!--<div id="previewBox">test goes here</div>--->
                 <!--- END EDITOR--->
 
@@ -100,56 +100,6 @@
         <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-        <script type="text/javascript">
- 
-
-            function decodeHtml(html) {
-                var txt = document.createElement("textarea");
-                txt.innerHTML = html;
-                return txt.value;
-            }
-
-            $(document).ready(function(){
-                $('#token').click(function() {
-                    $('#token').attr("type","password");
-                });
-            });
-            var contents = $('#thenote').html();
-            $('#thenote').blur(function() {
-                if (contents!=$(this).html()){
-                    //alert('Handler for .change() called.');
-                    contents = $(this).html();
-                    put_data(contents);
-                }
-            });
-
-            $( "#thenote" ).keyup(function() {
-                //alert( "Handler for .keyup() called." );
-                let contents = $( "#thenote" ).html()
-                //$("#previewBox").html( decodeHtml(contents) );
-                put_data(contents);
-            });
-
-            var put_data = (contents) => {
-                var data = {};
-                data.contents = contents;
-                data.t = "<?php echo $t; ?>";
-                var json = JSON.stringify(data);
-                var xhr = new XMLHttpRequest();
-                xhr.open("PUT", '_api.php', true);
-                xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
-                xhr.onload = function () {
-                    var users = JSON.parse(xhr.responseText);
-                    if (xhr.readyState == 4 && xhr.status == "200") {
-	                    //alert("received");
-                    } else {
-                        alert("error");
-	                    console.error(users);
-                    }
-                }
-                xhr.send(json);
-            }
-
-        </script>
+        <script src="dynamic_notes.js"></script>
     </body>
 </html>
